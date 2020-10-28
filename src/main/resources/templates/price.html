@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet"
+          href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+
+<pre>
+    <code>
+        <span id="somePair" th:text="${somePair.pairName}"></span> pair
+        <span id="somePrice" th:text="${somePair.pairPrice}"></span> last quote
+    </code>
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+
+
+    <title>Input Data to Convert</title>
+</head>
+
+<body>
+<div>
+    <span>Pairs available for conversion today:</span>
+    <br>
+    <tr th:each="allPairs : ${allPairs}">
+        <td th:text="${allPairs}"></td> ,
+    </tr>
+</div>
+
+<br>
+
+<div>
+Enter pairs<input id="pairName" type="text"/>
+<br>
+</div>
+
+<button id="send_snippet" type="submit" onclick="send()">Submit</button>
+
+<script type="text/javascript">
+    function send() {
+        let object = {
+            "pairName": document.getElementById("pairName").value
+        };
+
+        let json = JSON.stringify(object);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", '/api/new', false)
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        xhr.send(json);
+
+        if (xhr.status === 200) {
+            alert("Data received and processed!");
+        }
+    }
+</script>
+
+</body>
+</html>
