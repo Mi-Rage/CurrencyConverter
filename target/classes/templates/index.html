@@ -23,8 +23,10 @@
 <br>
 
 <div>
-Enter pairs<input id="pairName" type="text"/>
-<br>
+    Enter pairs<input id="pairName" type="text"/>
+<br><br>
+    Enter quantity<input id="quantityVal" type="text"/>
+
 </div>
 
 <button id="send_snippet" type="submit" onclick="send()">Submit</button>
@@ -32,7 +34,8 @@ Enter pairs<input id="pairName" type="text"/>
 <script type="text/javascript">
     function send() {
         let object = {
-            "pairName": document.getElementById("pairName").value
+            "pairName": document.getElementById("pairName").value,
+            "quantity": document.getElementById("quantityVal").value
         };
 
         let json = JSON.stringify(object);
