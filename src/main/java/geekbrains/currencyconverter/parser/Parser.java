@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -41,24 +40,27 @@ public class Parser {
 
     /**
      * Получаем по API список всех доступных к обмену криптовалютных пар
+     * Заодно преобразуем в удобочитаемый вид
      * @return List<String> массив всех имен пар.
      * @throws IOException - вылетит если начудили с url запросом
      */
     public static List<String> getAllPairs() throws IOException {
         List<String> allPairsNames = new ArrayList<>();
-        String url = ALL_PAIRS_NAMES;
 
-        String parsingData = getDataFromApi(url);
+        String parsingData = getDataFromApi(ALL_PAIRS_NAMES);
 
         JsonObject jsonObject = JsonParser.parseString(parsingData).getAsJsonObject();
         JsonObject resultObject = jsonObject.getAsJsonObject("result");
         for (Map.Entry<String, JsonElement> item : resultObject.entrySet()) {
             String name = item.getKey();
-            allPairsNames.add(name);
+            JsonObject itemDetails = item.getValue().getAsJsonObject();
+            JsonElement wsname = itemDetails.get("wsname");
+            if (wsname != null) {
+                allPairsNames.add(name + " : " + "from " + wsname.toString()
+                        .replaceAll("\"", "")
+                        .replaceAll("/", " to "));
+            }
         }
-
-        System.out.println(Arrays.toString(allPairsNames.toArray()));
-
         return allPairsNames;
     }
 
