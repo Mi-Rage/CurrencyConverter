@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,6 +34,14 @@ public class MainController {
         List<String> allPairs = Parser.getAllPairs();
         model.addAttribute("allPairs", allPairs);
         return "index";
+    }
+
+    @RequestMapping(value = { "/app/new1" }, method = RequestMethod.GET)
+    public String selectOptionExample1Page(Model model) throws IOException {
+
+        List<String> allPairs = Parser.getAllPairs();
+        model.addAttribute("allPairs", allPairs);
+        return "index1";
     }
 
     /**
