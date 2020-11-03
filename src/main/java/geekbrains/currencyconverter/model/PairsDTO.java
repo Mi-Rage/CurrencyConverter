@@ -2,7 +2,7 @@ package geekbrains.currencyconverter.model;
 
 public class PairsDTO {
     private String pairNameDTO;
-    private String quantityDTO = "0";
+    private int quantityDTO;
 
     public String getPairNameDTO() {
         return pairNameDTO;
@@ -12,11 +12,11 @@ public class PairsDTO {
         this.pairNameDTO = pairNameDTO;
     }
 
-    public String getQuantityDTO() {
+    public int getQuantityDTO() {
         return quantityDTO;
     }
 
-    public void setQuantityDTO(String quantityDTO) {
+    public void setQuantityDTO(int quantityDTO) {
         this.quantityDTO = quantityDTO;
     }
 }

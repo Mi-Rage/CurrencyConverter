@@ -43,13 +43,13 @@ public class ApiController {
         responsePairs.setSourceCurrency(pairs[3]);
         responsePairs.setRequiredCurrency(pairs[5]);
 
-        String quantity = newPairs.getQuantityDTO();
+        int quantity = newPairs.getQuantityDTO();
         responsePairs.setQuantity(quantity);
 
         String lastPairPrice = Parser.getLastPriseByPairs(pairs[0]);
         responsePairs.setPairPrice(lastPairPrice);
 
-        float amount = Integer.parseInt(quantity) * Float.parseFloat(lastPairPrice);
+        float amount = quantity * Float.parseFloat(lastPairPrice);
         responsePairs.setAmount(String.valueOf(amount));
 
         service.setToRepository(responsePairs);

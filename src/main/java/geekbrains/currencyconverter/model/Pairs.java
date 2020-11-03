@@ -4,7 +4,7 @@ public class Pairs {
 
     private String pairName;
     private String pairPrice;
-    private String quantity = "0";
+    private int quantity;
     private String amount = "0";
     private String sourceCurrency;
     private String requiredCurrency;
@@ -28,11 +28,11 @@ public class Pairs {
         this.pairPrice = pairPrice;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
