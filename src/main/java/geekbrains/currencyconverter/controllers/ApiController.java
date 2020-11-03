@@ -1,6 +1,5 @@
 package geekbrains.currencyconverter.controllers;
 
-import com.google.gson.JsonObject;
 import geekbrains.currencyconverter.model.Pairs;
 import geekbrains.currencyconverter.model.PairsDTO;
 import geekbrains.currencyconverter.services.ConverterService;

@@ -54,7 +54,10 @@
         xhr.send(json);
 
         if (xhr.status === 200) {
-            alert("Data received and processed!");
+            location.replace("/app/price");
+            //alert("Data received and processed!");
+        } else {
+            alert("ERROR! Check the input data!");
         }
     }
 </script>
