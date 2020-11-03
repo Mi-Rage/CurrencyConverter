@@ -34,14 +34,6 @@ public class MainController {
         return "index";
     }
 
-//    @RequestMapping(value = { "/app/new1" }, method = RequestMethod.GET)
-//    public String selectOptionExample1Page(Model model) throws IOException {
-//
-//        List<String> allPairs = Parser.getAllPairs();
-//        model.addAttribute("allPairs", allPairs);
-//        return "index1";
-//    }
-
     /**
      * На этой странице получаем результат в виде "пара" "цена"
      * Данные берем из API биржи по запрошенной в странице index паре
