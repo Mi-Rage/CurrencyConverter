@@ -6,6 +6,8 @@ public class Pairs {
     private String pairPrice;
     private String quantity = "0";
     private String amount = "0";
+    private String sourceCurrency;
+    private String requiredCurrency;
 
     public Pairs() {
     }
@@ -40,6 +42,22 @@ public class Pairs {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public String getSourceCurrency() {
+        return sourceCurrency;
+    }
+
+    public void setSourceCurrency(String sourceCurrency) {
+        this.sourceCurrency = sourceCurrency;
+    }
+
+    public String getRequiredCurrency() {
+        return requiredCurrency;
+    }
+
+    public void setRequiredCurrency(String requiredCurrency) {
+        this.requiredCurrency = requiredCurrency;
     }
 }
 

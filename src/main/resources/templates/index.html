@@ -1,42 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <meta charset="UTF-8">
-
-
-
-    <title>Input Data to Convert</title>
+    <title>Select Option Exchange</title>
 </head>
-
 <body>
 
-<div>
-    <span>Pairs available for conversion today:</span>
-    <br>
-    <tr th:each="allPairs : ${allPairs}">
-        <td th:text="${allPairs}"></td> ,
-    </tr>
-</div>
+<h2>Select Option Exchange</h2>
 
-<br>
+    <table>
+        <tr>
+            <td>Select Pairs:</td>
+            <td>
+                <select id="selected" name="selected">
+<!--                <select th:field="*{allPairs}">-->
+                    <option value=""> -- </option>
+                    <option th:each="eachPair : ${allPairs}"
+                            th:value="${eachPair}"
+                            th:text="${eachPair}"/>
+                </select>
 
-<div>
-    Enter pairs<input id="pairName" type="text"/>
-<br><br>
+            </td>
+        </tr>
+    </table>
+
+<tr>
     Enter quantity<input id="quantityVal" type="text"/>
+</tr>
 
-</div>
+    <button id="send_snippet" type="submit" onclick="send()">Submit</button>
 
-<button id="send_snippet" type="submit" onclick="send()">Submit</button>
+
 
 <script type="text/javascript">
     function send() {
         let object = {
-            "pairName": document.getElementById("pairName").value,
-            "quantity": document.getElementById("quantityVal").value
+            "pairNameDTO": document.getElementById("selected").value,
+            "quantityDTO": document.getElementById("quantityVal").value
         };
 
         let json = JSON.stringify(object);
@@ -53,4 +52,5 @@
 </script>
 
 </body>
+
 </html>

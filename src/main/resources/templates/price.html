@@ -14,10 +14,10 @@
 
 <pre>
     <code>
-        <span id="somePair" th:text="${somePair.pairName}"></span> pair
+        Conversion requested for a pair <span id="somePair" th:text="${somePair.pairName}"></span>
         <span id="somePrice" th:text="${somePair.pairPrice}"></span> last quote
-        <span th:text="${somePair.quantity}"></span> quantity to exchange
-        <span th:text="${somePair.amount}"></span> total amount
+        <span th:text="${somePair.quantity}"></span> quantity <span th:text="${somePair.getSourceCurrency()}"></span> to exchange
+        <span th:text="${somePair.amount}"></span> total <span th:text="${somePair.getRequiredCurrency()}"></span> amount
     </code>
 </pre>
 

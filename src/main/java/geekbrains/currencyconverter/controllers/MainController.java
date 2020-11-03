@@ -7,15 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.IOException;
 import java.util.List;
 
 @Controller
 public class MainController {
-    // localhost:8889/...
+    // localhost:5000/...
     private final ConverterService service;
 
     @Autowired
@@ -26,8 +24,8 @@ public class MainController {
     /**
      * Главная страница для ввода данных нашего приложения.
      * При загрузке обращается к бирже через API и получет все доступные к обмену пары
-     * Выбираем и вводим название желаемой пары криптовалюты, например DASHEUR или ETHUSDT
-     * @return страница localhost:8889/app/new
+     * Выбираем в выпадающем списке нужную пару криптовалюты и вводим количсество к обмену
+     * @return страница localhost:8889/app/new/index.html
      */
     @GetMapping(path = "/app/new", produces = "text/html")
     public String homePage(Model model) throws IOException {
@@ -36,18 +34,18 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = { "/app/new1" }, method = RequestMethod.GET)
-    public String selectOptionExample1Page(Model model) throws IOException {
-
-        List<String> allPairs = Parser.getAllPairs();
-        model.addAttribute("allPairs", allPairs);
-        return "index1";
-    }
+//    @RequestMapping(value = { "/app/new1" }, method = RequestMethod.GET)
+//    public String selectOptionExample1Page(Model model) throws IOException {
+//
+//        List<String> allPairs = Parser.getAllPairs();
+//        model.addAttribute("allPairs", allPairs);
+//        return "index1";
+//    }
 
     /**
      * На этой странице получаем результат в виде "пара" "цена"
      * Данные берем из API биржи по запрошенной в странице index паре
-     * @param model - модель дял thymeleaf
+     * @param model - модель для thymeleaf
      * @return страница localhost:8889/app/price
      */
     @GetMapping(path = "/app/price", produces = "text/html")
