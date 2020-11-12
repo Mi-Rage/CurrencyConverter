@@ -8,6 +8,7 @@ public class Pairs {
     private String amount = "0";
     private String sourceCurrency;
     private String requiredCurrency;
+    private String date;
 
     public Pairs() {
     }
@@ -58,6 +59,14 @@ public class Pairs {
 
     public void setRequiredCurrency(String requiredCurrency) {
         this.requiredCurrency = requiredCurrency;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
 

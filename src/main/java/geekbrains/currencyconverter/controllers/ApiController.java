@@ -4,6 +4,7 @@ import geekbrains.currencyconverter.model.Pairs;
 import geekbrains.currencyconverter.model.PairsDTO;
 import geekbrains.currencyconverter.services.ConverterService;
 import geekbrains.currencyconverter.parser.Parser;
+import geekbrains.currencyconverter.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +38,8 @@ public class ApiController {
     public String setApiCode(@RequestBody PairsDTO newPairs) throws IOException {
         Pairs responsePairs = new Pairs();
 
+        responsePairs.setDate(Util.getCurrentDateTime());
+
         String[] pairs = newPairs.getPairNameDTO().split(" ");
         responsePairs.setPairName(pairs[0]);
 
@@ -52,9 +55,11 @@ public class ApiController {
         float amount = quantity * Float.parseFloat(lastPairPrice);
         responsePairs.setAmount(String.valueOf(amount));
 
+
         service.setToRepository(responsePairs);
 
         String response = "{ \"id\" : \"" + responsePairs.getPairName() + "\" , \n" +
+                " \"date\" : \"" + responsePairs.getDate() + "\", \n" +
                 " \"price\" : \"" + responsePairs.getPairPrice() + "\" , \n" +
                 " \"quantity\" : \"" + responsePairs.getQuantity() + "\", \n" +
                 " \"sourceCurrency\" : \"" + responsePairs.getSourceCurrency() + "\", \n" +
@@ -62,6 +67,17 @@ public class ApiController {
                 " \"amount\" : \"" + responsePairs.getAmount() + "\" } \n";
         System.out.println(response);
         return response;
+    }
+
+    /**
+     * Команда очистки репозитория
+     * @return String сообщение об очистке.
+     */
+    @GetMapping(path = "/api/clear", produces = "application/json;charset=UTF-8")
+    public String clearRepo() {
+        service.clearRepository();
+        System.out.println("Requested cleanup of the repository");
+        return "Repository cleared";
     }
 
 }

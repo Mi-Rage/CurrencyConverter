@@ -10,10 +10,52 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
             crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
 
 </head>
 
 <body>
+
+<div class="container">
+    <h1 class="display-4">CRYPTO CONVERTER APP</h1>
+    <p class="lead">We receive and process data using the Kraken exchange API.</p>
+    <p class="lead">Select the cryptocurrency pair you are interested in, enter the number of units to convert and click
+        the "Convert" button.</p>
+</div>
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">BTC Price</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                    $<span th:text="${bitcoinPrice}"></span>
+                    <small class="text-muted">/ 1 BTC</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Today</li>
+                    <li>According to the Kraken exchange</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">ETH Price</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                    $<span th:text="${ethPrice}"></span>
+                    <small class="text-muted">/ 1 ETH</small>
+                </h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Today</li>
+                    <li>According to the Kraken exchange</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
 
     <h2>Select Option Exchange</h2>
@@ -60,7 +102,7 @@
         xhr.send(json);
 
         if (xhr.status === 200) {
-            location.replace("/app/price");
+            location.replace("/result");
         } else {
             alert("ERROR! Somethings wrong...");
         }
