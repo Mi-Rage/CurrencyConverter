@@ -90,7 +90,8 @@ public class Parser {
     }
 
     /**
-     * Получаем историю ставок по выбранно паре, все данные из API объекта
+     * Получаем всю историю ставок по выбранной паре, все данные из API объекта
+     * Сортируем полученный список по возрастанию поля timeStamp
      * @param pairName String имя пары в API
      * @return ArrayList с объектами Rate с выбранным периодом
      * @throws IOException вылетит если накосячили
@@ -117,13 +118,7 @@ public class Parser {
             }
         }
 
-        rateList.sort(Comparator.comparing(Rate::getTimeStamp).reversed());
-//        Collections.sort(rateList, new Comparator<Rate>() {
-//            public int compare(Rate o1, Rate o2) {
-//                return o1.getTimeStamp().compareTo(o2.getTimeStamp());
-//            }
-//        });
-        Util.getAllTimestamp(rateList);
+        rateList.sort(Comparator.comparing(Rate::getTimeStamp));
 
         return Util.getPeriodOfRates(rateList);
     }

@@ -30,7 +30,7 @@
 <div class = "container">
     <p class="lead">Server Date: <b><span th:text="${somePair.date}"></span></b></p>
     <p class="lead">Conversion requested for a pair: <b><span id="somePair" th:text="${somePair.pairName}"></span></b></p>
-    <p class="lead"><b><span id="somePrice" th:text="${somePair.pairPrice}"></span></b> last quote</p>
+    <p class="lead"><b><span id="somePrice" th:text="${somePair.pairPrice}"></span></b> today's opening price</p>
     <p class="lead"><b><span th:text="${somePair.quantity}"></span></b> quantity <b><span th:text="${somePair.getSourceCurrency()}"></span></b> to exchange</p>
     <p class="lead"> <b><span th:text="${somePair.amount}"></span></b> total <b><span th:text="${somePair.getRequiredCurrency()}"></span></b> amount</p>
 
@@ -42,15 +42,66 @@
                 let value = [[${valueList}]];
 
                 // Create liteChart.js Object
-                settings = {};
+                settings = {
+                    animate: {
+                        show: true,
+                        duration: 0.8,
+                    },
+                    axisX: {
+                        show: true,
+                        color: "#1e88f2",
+                        width: 2,
+                        value: "",
+                        minValue: 0,
+                        maxValue: 0,
+                    },
+                    axisY: {
+                        show: true,
+                        color: "#1e88f2",
+                        width: 2,
+                        value: "",
+                        minValue: 0,
+                        maxValue: 0,
+                    },
+                    gridX: {
+                        show: true,
+                        interval: 0,
+                        fill: 1,
+                        label: {
+                            show: true
+                        },
+                        stroke:"#1e88f2",
+                        width:2,
+                        dasharray:"0 10.04",
+                        linecap:"round",
+                    },
+                    gridY: {
+                        show: true,
+                        interval: 0,
+                        fill: 1,
+                        label: {
+                            show: true
+                        },
+                        stroke:"#1e88f2",
+                        width:2,
+                        dasharray:"0 10.04",
+                        linecap:"round",
+                    },
+                    labels: {
+                        show: true,
+                        fontColor: "#727283",
+                        fontSize: 12,
+                        fontFamily: "sans-serif",
+                        fontWeight: "normal",
+                    },
+                };
                 let d = new liteChart("chart", settings);
 
                 // Set labels
                 d.setLabels(date);
 
                 // Set legends and values
-                d.addLegend({"name": "ASK", "stroke": "#CDDC39", "fill": "#fff", "values": value});
-                // d.addLegend({"name": "Night", "stroke": "#3b95f7", "fill": "#fff", "values": val2});
+                d.addLegend({"name": "Latest ASK on the exchange", "stroke": "#CDDC39", "fill": "#fff", "values": value});
 
                 // Inject chart into DOM object
                 let div = document.getElementById("lastRatesHistory");
@@ -64,20 +115,18 @@
 </div>
 <br>
 
-
-
 <div class = "container">
     <p class="lead"><b>Last request:</b></p>
     <p class="lead">Server Date: <b><span th:text="${previousPair.date}"></span></b></p>
     <p class="lead">Conversion requested for a pair: <b><span id="previousPair" th:text="${previousPair.pairName}"></span></b></p>
-    <p class="lead"><b><span th:text="${previousPair.pairPrice}"></span></b> last quote</p>
+    <p class="lead"><b><span th:text="${previousPair.pairPrice}"></span></b> this date opening price</p>
     <p class="lead"><b><span th:text="${previousPair.quantity}"></span></b> quantity <b><span th:text="${previousPair.getSourceCurrency()}"></span></b> to exchange</p>
     <p class="lead"><b><span th:text="${previousPair.amount}"></span></b> total <b><span th:text="${previousPair.getRequiredCurrency()}"></span></b> amount</p>
     <div class="input-group-append">
         <button class="btn btn-primary" type="button" onclick="goToHomePage()" >Another request</button>
     </div>
+    <br>
 </div>
-
 
 </body>
 </html>

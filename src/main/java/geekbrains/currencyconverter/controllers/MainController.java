@@ -44,6 +44,7 @@ public class MainController {
     /**
      * На этой странице получаем результат в виде "пара" "цена"
      * Данные берем из API биржи по запрошенной в странице index паре
+     * Заодно передаем данные для графика последних изменений курса
      * @param model - модель для thymeleaf
      * @return страница localhost:5000/result
      */
@@ -53,6 +54,7 @@ public class MainController {
         Pairs somePair = service.getRepository().get(lastIndex);
         model.addAttribute("somePair", somePair);
         model.addAttribute("somePrice", somePair);
+
         Pairs previousPair = service.getPreviousPair();
         model.addAttribute("previousPair", previousPair);
 
@@ -69,7 +71,7 @@ public class MainController {
      * Страница админки.
      * Здесь можем посмотреть общее к-во запросов, последние запросы
      * @param model - модель для thymeleaf
-     * @return страница localhost:8889/admin
+     * @return страница localhost:5000/admin
      */
     @GetMapping(path = "/admin", produces = "text/html")
     public String enterAdmin(Model model) {
