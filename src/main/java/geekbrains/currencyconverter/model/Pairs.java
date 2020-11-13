@@ -1,5 +1,7 @@
 package geekbrains.currencyconverter.model;
 
+import java.util.List;
+
 public class Pairs {
 
     private String pairName;
@@ -9,6 +11,7 @@ public class Pairs {
     private String sourceCurrency;
     private String requiredCurrency;
     private String date;
+    private List<Rate> rateList;
 
     public Pairs() {
     }
@@ -67,6 +70,14 @@ public class Pairs {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public List<Rate> getRateList() {
+        return rateList;
+    }
+
+    public void setRateList(List<Rate> rateList) {
+        this.rateList = rateList;
     }
 }
 

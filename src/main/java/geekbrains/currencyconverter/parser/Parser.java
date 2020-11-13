@@ -3,20 +3,21 @@ package geekbrains.currencyconverter.parser;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import geekbrains.currencyconverter.model.Rate;
+import geekbrains.currencyconverter.util.Util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Parser {
 
     private static final String PRISE_BY_PAIR = "https://api.kraken.com/0/public/Ticker?info=margin&pair=";
     private static final String ALL_PAIRS_NAMES = "https://api.kraken.com/0/public/AssetPairs";
+    private static final String HISTORY_PAIR_RATE = "https://api.kraken.com/0/public/Depth?pair=";
 
 
     /**
@@ -86,5 +87,44 @@ public class Parser {
         }
         in.close();
         return response.toString();
+    }
+
+    /**
+     * Получаем историю ставок по выбранно паре, все данные из API объекта
+     * @param pairName String имя пары в API
+     * @return ArrayList с объектами Rate с выбранным периодом
+     * @throws IOException вылетит если накосячили
+     */
+    public static List<Rate> getRateHistory(String pairName) throws IOException {
+        List<Rate> rateList = new ArrayList<>();
+
+        String parsingData = getDataFromApi(HISTORY_PAIR_RATE + pairName);
+
+        JsonObject jsonObject = JsonParser.parseString(parsingData).getAsJsonObject();
+        JsonObject resultObject = jsonObject.getAsJsonObject("result");
+        for (Map.Entry<String, JsonElement> item : resultObject.entrySet()) {
+            JsonObject itemDetails = item.getValue().getAsJsonObject();
+            JsonElement asks = itemDetails.get("asks");
+            if (asks != null) {
+                for (JsonElement each : asks.getAsJsonArray()) {
+                    float parsedRateValue = each.getAsJsonArray().get(0).getAsFloat();
+                    long parsedDate = each.getAsJsonArray().get(2).getAsInt();
+                    Rate rate = new Rate();
+                    rate.setRateValue(parsedRateValue);
+                    rate.setTimeStamp(parsedDate);
+                    rateList.add(rate);
+                }
+            }
+        }
+
+        rateList.sort(Comparator.comparing(Rate::getTimeStamp).reversed());
+//        Collections.sort(rateList, new Comparator<Rate>() {
+//            public int compare(Rate o1, Rate o2) {
+//                return o1.getTimeStamp().compareTo(o2.getTimeStamp());
+//            }
+//        });
+        Util.getAllTimestamp(rateList);
+
+        return Util.getPeriodOfRates(rateList);
     }
 }

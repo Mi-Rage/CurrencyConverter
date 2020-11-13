@@ -1,8 +1,10 @@
 package geekbrains.currencyconverter.controllers;
 
 import geekbrains.currencyconverter.model.Pairs;
+import geekbrains.currencyconverter.model.Rate;
 import geekbrains.currencyconverter.parser.Parser;
 import geekbrains.currencyconverter.services.ConverterService;
+import geekbrains.currencyconverter.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +28,7 @@ public class MainController {
      * При загрузке обращается к бирже через API и получет все доступные к обмену пары
      * а так же значения цены для BTC и ETH
      * Выбираем в выпадающем списке нужную пару криптовалюты и вводим количсество к обмену
-     * @return страница localhost:8889/index
+     * @return страница localhost:5000/index
      */
     @GetMapping(path = "/", produces = "text/html")
     public String homePage(Model model) throws IOException {
@@ -43,7 +45,7 @@ public class MainController {
      * На этой странице получаем результат в виде "пара" "цена"
      * Данные берем из API биржи по запрошенной в странице index паре
      * @param model - модель для thymeleaf
-     * @return страница localhost:8889/result
+     * @return страница localhost:5000/result
      */
     @GetMapping(path = "/result", produces = "text/html")
     public String somePage(Model model) {
@@ -53,6 +55,13 @@ public class MainController {
         model.addAttribute("somePrice", somePair);
         Pairs previousPair = service.getPreviousPair();
         model.addAttribute("previousPair", previousPair);
+
+        List<Rate> rateList = somePair.getRateList();
+        List<String> dateList = Util.getDateList(rateList);
+        List<Float> valueList = Util.getRateList(rateList);
+        model.addAttribute("dateList", dateList);
+        model.addAttribute("valueList", valueList);
+
         return "result";
     }
 

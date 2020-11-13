@@ -2,6 +2,7 @@ package geekbrains.currencyconverter.controllers;
 
 import geekbrains.currencyconverter.model.Pairs;
 import geekbrains.currencyconverter.model.PairsDTO;
+import geekbrains.currencyconverter.model.Rate;
 import geekbrains.currencyconverter.services.ConverterService;
 import geekbrains.currencyconverter.parser.Parser;
 import geekbrains.currencyconverter.util.Util;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class ApiController {
@@ -55,6 +57,8 @@ public class ApiController {
         float amount = quantity * Float.parseFloat(lastPairPrice);
         responsePairs.setAmount(String.valueOf(amount));
 
+        List<Rate> rateList = Parser.getRateHistory(responsePairs.getPairName());
+        responsePairs.setRateList(rateList);
 
         service.setToRepository(responsePairs);
 

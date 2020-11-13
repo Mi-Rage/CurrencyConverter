@@ -1,8 +1,9 @@
-geekbrains\currencyconverter\controllers\MainController.class
 geekbrains\currencyconverter\model\Pairs.class
-geekbrains\currencyconverter\CurrencyConverterApplication.class
 geekbrains\currencyconverter\model\PairsDTO.class
 geekbrains\currencyconverter\services\ConverterService.class
 geekbrains\currencyconverter\repository\Repository.class
+geekbrains\currencyconverter\util\Util.class
 geekbrains\currencyconverter\controllers\ApiController.class
+geekbrains\currencyconverter\controllers\MainController.class
+geekbrains\currencyconverter\CurrencyConverterApplication.class
 geekbrains\currencyconverter\parser\Parser.class
