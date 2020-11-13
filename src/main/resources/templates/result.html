@@ -20,6 +20,7 @@
         }
     </script>
     <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="lib/liteChart.min.js"></script>
 </head>
 <body>
 <div class = "container">
@@ -32,8 +33,38 @@
     <p class="lead"><b><span id="somePrice" th:text="${somePair.pairPrice}"></span></b> last quote</p>
     <p class="lead"><b><span th:text="${somePair.quantity}"></span></b> quantity <b><span th:text="${somePair.getSourceCurrency()}"></span></b> to exchange</p>
     <p class="lead"> <b><span th:text="${somePair.amount}"></span></b> total <b><span th:text="${somePair.getRequiredCurrency()}"></span></b> amount</p>
+    <div id="lastRatesHistory" style="height: 400px;">
+        <script th:inline="javascript">
+            document.addEventListener("DOMContentLoaded", function(){
+                let date1 = [[${d}]]
+                let date = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                let val1 = [100, 200, 450, 400, 500, 300, 700, 800, 601, 705, 604, 803];
+                let val2 = [200, 150, 240, 180, 150, 240, 230, 300, 200, 150, 270, 200];
+                // Create liteChart.js Object
+                settings = {};
+                let d = new liteChart("chart", settings);
+
+                // Set labels
+                d.setLabels(date);
+
+                // Set legends and values
+                d.addLegend({"name": "Day", "stroke": "#CDDC39", "fill": "#fff", "values": val1});
+                d.addLegend({"name": "Night", "stroke": "#3b95f7", "fill": "#fff", "values": val2});
+
+                // Inject chart into DOM object
+                let div = document.getElementById("lastRatesHistory");
+                d.inject(div);
+
+                // Draw
+                d.draw();
+            });
+        </script>
+    </div>
 </div>
 <br>
+
+
+
 <div class = "container">
     <p class="lead"><b>Last request:</b></p>
     <p class="lead">Server Date: <b><span th:text="${previousPair.date}"></span></b></p>
