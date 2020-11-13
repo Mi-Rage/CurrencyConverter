@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Result</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+            crossorigin="anonymous"></script>
+
+    <script type= "text/javascript">
+        function goToHomePage()
+        {
+            document.location.href = "/";
+        }
+    </script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="lib/liteChart.min.js"></script>
+</head>
+<body>
+<div class = "container">
+    <h1 class="display-4">CRYPTO CONVERTER APP</h1>
+</div>
+
+<div class = "container">
+    <p class="lead">Server Date: <b><span th:text="${somePair.date}"></span></b></p>
+    <p class="lead">Conversion requested for a pair: <b><span id="somePair" th:text="${somePair.pairName}"></span></b></p>
+    <p class="lead"><b><span id="somePrice" th:text="${somePair.pairPrice}"></span></b> last quote</p>
+    <p class="lead"><b><span th:text="${somePair.quantity}"></span></b> quantity <b><span th:text="${somePair.getSourceCurrency()}"></span></b> to exchange</p>
+    <p class="lead"> <b><span th:text="${somePair.amount}"></span></b> total <b><span th:text="${somePair.getRequiredCurrency()}"></span></b> amount</p>
+    <div id="lastRatesHistory" style="height: 400px;">
+        <script th:inline="javascript">
+            document.addEventListener("DOMContentLoaded", function(){
+                let date = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                let val1 = [100, 200, 450, 400, 500, 300, 700, 800, 601, 705, 604, 803];
+                let val2 = [200, 150, 240, 180, 150, 240, 230, 300, 200, 150, 270, 200];
+                // Create liteChart.js Object
+                settings = {};
+                let d = new liteChart("chart", settings);
+
+                // Set labels
+                d.setLabels(date);
+
+                // Set legends and values
+                d.addLegend({"name": "Day", "stroke": "#CDDC39", "fill": "#fff", "values": val1});
+                d.addLegend({"name": "Night", "stroke": "#3b95f7", "fill": "#fff", "values": val2});
+
+                // Inject chart into DOM object
+                let div = document.getElementById("lastRatesHistory");
+                d.inject(div);
+
+                // Draw
+                d.draw();
+            });
+        </script>
+    </div>
+</div>
+<br>
+
+
+
+<div class = "container">
+    <p class="lead"><b>Last request:</b></p>
+    <p class="lead">Server Date: <b><span th:text="${previousPair.date}"></span></b></p>
+    <p class="lead">Conversion requested for a pair: <b><span id="previousPair" th:text="${previousPair.pairName}"></span></b></p>
+    <p class="lead"><b><span th:text="${previousPair.pairPrice}"></span></b> last quote</p>
+    <p class="lead"><b><span th:text="${previousPair.quantity}"></span></b> quantity <b><span th:text="${previousPair.getSourceCurrency()}"></span></b> to exchange</p>
+    <p class="lead"><b><span th:text="${previousPair.amount}"></span></b> total <b><span th:text="${previousPair.getRequiredCurrency()}"></span></b> amount</p>
+    <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="goToHomePage()" >Another request</button>
+    </div>
+</div>
+
+
+</body>
+</html>
