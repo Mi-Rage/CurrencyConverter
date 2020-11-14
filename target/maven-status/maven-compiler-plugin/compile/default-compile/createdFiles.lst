@@ -1,4 +1,5 @@
 geekbrains\currencyconverter\model\Pairs.class
+geekbrains\currencyconverter\model\Rate.class
 geekbrains\currencyconverter\model\PairsDTO.class
 geekbrains\currencyconverter\services\ConverterService.class
 geekbrains\currencyconverter\repository\Repository.class

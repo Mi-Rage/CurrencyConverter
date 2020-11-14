@@ -62,7 +62,7 @@ public class Util {
         List<String> dateList = new ArrayList<>();
         for (Rate each : sourceRates) {
             Date date = new java.util.Date(each.getTimeStamp() * 1000L);
-            dateList.add(new SimpleDateFormat("dd-MM-yy").format(date));
+            dateList.add("'" + new SimpleDateFormat("dd/MM/yy").format(date) + "'");
         }
         return dateList;
     }
