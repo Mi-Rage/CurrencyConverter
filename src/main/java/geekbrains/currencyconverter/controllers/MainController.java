@@ -80,4 +80,19 @@ public class MainController {
         return "admin";
     }
 
+    @GetMapping(path = "/features", produces = "text/html")
+    public String getFeatures() {
+        return "features";
+    }
+
+    @GetMapping(path = "/source", produces = "text/html")
+    public String getSource() {
+        return "source";
+    }
+
+    @GetMapping(path = "/support", produces = "text/html")
+    public String getSupport() {
+        return "support";
+    }
+
 }
