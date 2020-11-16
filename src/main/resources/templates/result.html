@@ -17,25 +17,39 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    <script type= "text/javascript">
-        function goToHomePage()
-        {
+    <script type="text/javascript">
+        function goToHomePage() {
             document.location.href = "/";
         }
     </script>
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class = "container">
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Open Source Project</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/">Home</a>
+        <a class="p-2 text-dark" href="/features">Features</a>
+        <a class="p-2 text-dark" href="/source">Source</a>
+        <a class="p-2 text-dark" href="/support">Support</a>
+    </nav>
+</div>
+
+<div class="container">
     <h1 class="display-4">CRYPTO CONVERTER APP</h1>
 </div>
 
-<div class = "container">
+<div class="container">
     <p class="lead">Server Date: <b><span th:text="${somePair.date}"></span></b></p>
-    <p class="lead">Conversion requested for a pair: <b><span id="somePair" th:text="${somePair.pairName}"></span></b></p>
-    <p class="lead"><b><span id="somePrice" th:text="${somePair.pairPrice}"></span></b> today's opening price</p>
-    <p class="lead"><b><span th:text="${somePair.quantity}"></span></b> quantity <b><span th:text="${somePair.getSourceCurrency()}"></span></b> to exchange</p>
-    <p class="lead"> <b><span th:text="${somePair.amount}"></span></b> total <b><span th:text="${somePair.getRequiredCurrency()}"></span></b> amount</p>
+    <p class="lead">Conversion requested for a pair: <b><span id="somePair" th:text="${somePair.pairName}"></span></b>
+        , today's opening price <b><span id="somePrice" th:text="${somePair.pairPrice}"></span> </b>
+        <span th:text="${somePair.getRequiredCurrency()}"></span>
+        for 1 <span th:text="${somePair.getSourceCurrency()}"></span>.</p>
+    <p class="lead"><b><span th:text="${somePair.quantity}"></span></b> quantity <b><span
+            th:text="${somePair.getSourceCurrency()}"></span></b> to exchange,
+    <b><span th:text="${somePair.amount}"></span></b> total <b><span
+            th:text="${somePair.getRequiredCurrency()}"></span></b> amount.</p>
 
     <div id="chart">
     </div>
@@ -68,20 +82,24 @@
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
     </script>
-<br>
-
-<div class = "container">
-    <p class="lead"><b>Last request:</b></p>
-    <p class="lead">Server Date: <b><span th:text="${previousPair.date}"></span></b></p>
-    <p class="lead">Conversion requested for a pair: <b><span id="previousPair" th:text="${previousPair.pairName}"></span></b></p>
-    <p class="lead"><b><span th:text="${previousPair.pairPrice}"></span></b> opening price on the date of the request</p>
-    <p class="lead"><b><span th:text="${previousPair.quantity}"></span></b> quantity <b><span th:text="${previousPair.getSourceCurrency()}"></span></b> to exchange</p>
-    <p class="lead"><b><span th:text="${previousPair.amount}"></span></b> total <b><span th:text="${previousPair.getRequiredCurrency()}"></span></b> amount</p>
-    <div class="input-group-append">
-        <button class="btn btn-primary" type="button" onclick="goToHomePage()" >Another request</button>
-    </div>
     <br>
-</div>
+
+    <div class="container">
+        <p class="lead"><b>Last request:</b></p>
+        <p class="lead">Server Date: <b><span th:text="${previousPair.date}"></span></b></p>
+        <p class="lead">Conversion requested for a pair: <b><span id="previousPair"
+                                                                  th:text="${previousPair.pairName}"></span></b></p>
+        <p class="lead"><b><span th:text="${previousPair.pairPrice}"></span></b> opening price on the date of the
+            request.</p>
+        <p class="lead"><b><span th:text="${previousPair.quantity}"></span></b> quantity <b><span
+                th:text="${previousPair.getSourceCurrency()}"></span></b> to exchange,
+        <b><span th:text="${previousPair.amount}"></span></b> total <b><span
+                th:text="${previousPair.getRequiredCurrency()}"></span></b> amount.</p>
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" onclick="goToHomePage()">Another request</button>
+        </div>
+        <br>
+    </div>
 
 </body>
 </html>

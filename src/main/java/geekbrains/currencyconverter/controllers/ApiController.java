@@ -62,13 +62,13 @@ public class ApiController {
 
         service.setToRepository(responsePairs);
 
-        String response = "{ \"id\" : \"" + responsePairs.getPairName() + "\" , \n" +
+        String response = "{\n \"id\" : \"" + responsePairs.getPairName() + "\", \n" +
                 " \"date\" : \"" + responsePairs.getDate() + "\", \n" +
-                " \"price\" : \"" + responsePairs.getPairPrice() + "\" , \n" +
+                " \"price\" : \"" + responsePairs.getPairPrice() + "\", \n" +
                 " \"quantity\" : \"" + responsePairs.getQuantity() + "\", \n" +
                 " \"sourceCurrency\" : \"" + responsePairs.getSourceCurrency() + "\", \n" +
                 " \"requiredCurrency\" : \"" + responsePairs.getRequiredCurrency() + "\", \n" +
-                " \"amount\" : \"" + responsePairs.getAmount() + "\" } \n";
+                " \"amount\" : \"" + responsePairs.getAmount() + "\" \n} \n";
         System.out.println(response);
         return response;
     }

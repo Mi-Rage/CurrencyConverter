@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: geekbrains.currencyconverter.CurrencyConverterApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.755 s - in geekbrains.currencyconverter.CurrencyConverterApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.197 s - in geekbrains.currencyconverter.CurrencyConverterApplicationTests
