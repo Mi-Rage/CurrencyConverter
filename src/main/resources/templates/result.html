@@ -48,8 +48,8 @@
         for 1 <span th:text="${somePair.getSourceCurrency()}"></span>.</p>
     <p class="lead"><b><span th:text="${somePair.quantity}"></span></b> quantity <b><span
             th:text="${somePair.getSourceCurrency()}"></span></b> to exchange,
-    <b><span th:text="${somePair.amount}"></span></b> total <b><span
-            th:text="${somePair.getRequiredCurrency()}"></span></b> amount.</p>
+        <b><span th:text="${somePair.amount}"></span></b> total <b><span
+                th:text="${somePair.getRequiredCurrency()}"></span></b> amount.</p>
 
     <div id="chart">
     </div>
@@ -82,24 +82,23 @@
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
     </script>
-    <br>
-
-    <div class="container">
-        <p class="lead"><b>Last request:</b></p>
-        <p class="lead">Server Date: <b><span th:text="${previousPair.date}"></span></b></p>
-        <p class="lead">Conversion requested for a pair: <b><span id="previousPair"
-                                                                  th:text="${previousPair.pairName}"></span></b></p>
-        <p class="lead"><b><span th:text="${previousPair.pairPrice}"></span></b> opening price on the date of the
-            request.</p>
-        <p class="lead"><b><span th:text="${previousPair.quantity}"></span></b> quantity <b><span
-                th:text="${previousPair.getSourceCurrency()}"></span></b> to exchange,
+</div>
+<br>
+<div class="container">
+    <p class="lead"><b>Last request:</b></p>
+    <p class="lead">Server Date: <b><span th:text="${previousPair.date}"></span></b></p>
+    <p class="lead">Conversion requested for a pair: <b><span id="previousPair"
+                                                              th:text="${previousPair.pairName}"></span></b></p>
+    <p class="lead"><b><span th:text="${previousPair.pairPrice}"></span></b> opening price on the date of the
+        request.</p>
+    <p class="lead"><b><span th:text="${previousPair.quantity}"></span></b> quantity <b><span
+            th:text="${previousPair.getSourceCurrency()}"></span></b> to exchange,
         <b><span th:text="${previousPair.amount}"></span></b> total <b><span
                 th:text="${previousPair.getRequiredCurrency()}"></span></b> amount.</p>
-        <div class="input-group-append">
-            <button class="btn btn-primary" type="button" onclick="goToHomePage()">Another request</button>
-        </div>
-        <br>
+    <div class="input-group-append">
+        <button class="btn btn-primary" type="button" onclick="goToHomePage()">Another request</button>
     </div>
-
+    <br>
+</div>
 </body>
 </html>
