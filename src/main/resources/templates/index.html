@@ -78,10 +78,29 @@
             <option value="">Choose...</option>
             <option th:each="eachPair : ${allPairs}"
                     th:value="${eachPair}"
-                    th:text="${eachPair}"/>
+                    th:text="${eachPair}"></option>
         </select>
     </div>
-
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="option1">Or select the following:</label>
+        </div>
+        <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="option1"> BTC / USDT
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option2"> ETH / USDT
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option3"> LTC / USDT
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option4"> RPL / USDT
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option5"> BCH / USDT
+        </label>
+    </div>
     <div class="input-group mb-3">
         <input type="number" id="quantityVal" class="form-control" placeholder="Enter quantity"
                aria-label="Enter quantity" aria-describedby="button-addon2">
@@ -93,8 +112,31 @@
 
 <script type="text/javascript">
     function send() {
+        let pairName = "";
+
+        if(document.getElementById("inputGroupSelect01").value !== ""){
+            pairName = document.getElementById("inputGroupSelect01").value;
+        } else {
+            if(document.getElementById('option1').checked === true){
+                pairName = "XBTUSDT : from XBT to USDT";
+            }
+            if(document.getElementById('option2').checked === true){
+                pairName = "ETHUSDT : from ETH to USDT";
+            }
+            if(document.getElementById('option3').checked === true){
+                pairName = "LTCUSDT : from LTC to USDT";
+            }
+            if(document.getElementById('option4').checked === true){
+                pairName = "XRPUSDT : from XRP to USDT";
+            }
+            if(document.getElementById('option5').checked === true){
+                pairName = "BCHUSDT : from BCH to USDT";
+            }
+        }
+
+
         let object = {
-            "pairNameDTO": document.getElementById("inputGroupSelect01").value,
+            "pairNameDTO": pairName,
             "quantityDTO": document.getElementById("quantityVal").value
         };
 

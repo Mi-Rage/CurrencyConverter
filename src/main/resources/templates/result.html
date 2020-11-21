@@ -13,15 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
             crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    <script type="text/javascript">
-        function goToHomePage() {
-            document.location.href = "/";
-        }
-    </script>
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -53,35 +47,7 @@
 
     <div id="chart">
     </div>
-    <script>
-        var options = {
-            title: {
-                text: 'Exchange rate dynamics in recent days',
-                align: 'left'
-            },
-            series: [{
-                name: 'Average ASK price',
-                data: [[${valueList}]]
-            }],
-            chart: {
-                height: 350,
-                type: 'area'
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth'
-            },
-            xaxis: {
-                categories: [(${dateList})]
-            },
 
-        };
-
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-    </script>
 </div>
 <br>
 <div class="container">
@@ -100,5 +66,41 @@
     </div>
     <br>
 </div>
+
+<script type="text/javascript">
+    function goToHomePage() {
+        document.location.href = "/";
+    }
+</script>
+
+<script>
+    var options = {
+        title: {
+            text: 'Exchange rate dynamics in recent days',
+            align: 'left'
+        },
+        series: [{
+            name: 'Average ASK price',
+            data: [[${valueList}]]
+        }],
+        chart: {
+            height: 350,
+            type: 'area'
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            categories: [(${dateList})]
+        },
+
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
 </body>
 </html>
